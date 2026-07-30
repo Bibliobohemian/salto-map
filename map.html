@@ -503,10 +503,10 @@ filter: none;
 
       left: 50%;
 
-      top: 50%;
+      bottom: 18px;
 
       transform:
-        translate(-50%, -50%);
+        translateX(-50%);
 
       background:
         #1f1f2e;
@@ -521,7 +521,13 @@ filter: none;
         18px;
 
       width:
-        min(340px, 90vw);
+        min(420px, calc(100vw - 32px));
+
+      max-height:
+        min(420px, calc(100vh - 140px));
+
+      overflow-y:
+        auto;
 
       z-index: 999;
 
@@ -823,6 +829,10 @@ filter: none;
   max-width: 100%;
 
   min-height: 180px;
+
+  max-height: 46vh;
+
+  overflow-y: auto;
 
   border-radius:
     24px 24px 0 0;
