@@ -1,5 +1,5 @@
 const CACHE_NAME =
-  "salto-pocket-v2";
+  "salto-pocket-v3";
 
 const urlsToCache = [
 
