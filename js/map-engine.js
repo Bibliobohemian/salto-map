@@ -491,6 +491,118 @@ function refreshMissionUI() {
 
 }
 
+function openInitialMapTarget() {
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+  const publisher =
+    normalizeMissionValue(
+      params.get("publisher")
+    );
+
+  const stand =
+    normalizeMissionValue(
+      params.get("stand")
+    );
+
+  if (
+    !publisher &&
+    !stand
+  ) {
+    return;
+  }
+
+  const areaMatchesPublisher =
+    area => {
+
+      if (!publisher) {
+        return false;
+      }
+
+      return (
+        exhibitorsByStand[area.name] || []
+      ).some(exhibitor => {
+
+        const name =
+          normalizeMissionValue(
+            exhibitor.name
+          );
+
+        return (
+          name === publisher ||
+          name.includes(publisher) ||
+          publisher.includes(name)
+        );
+
+      });
+
+    };
+
+  const areaMatchesStand =
+    area => {
+
+      if (!stand) {
+        return false;
+      }
+
+      if (
+        normalizeMissionValue(
+          area.name
+        ) === stand
+      ) {
+        return true;
+      }
+
+      return (
+        exhibitorsByStand[area.name] || []
+      ).some(exhibitor =>
+        normalizeMissionValue(
+          exhibitor.stand
+        ).includes(stand)
+      );
+
+    };
+
+  const match =
+    AREA_INDEX.find(({ area }) => {
+
+      if (
+        area.type !== "stand"
+      ) {
+        return false;
+      }
+
+      return (
+        areaMatchesPublisher(
+          area
+        ) ||
+        areaMatchesStand(
+          area
+        )
+      );
+
+    });
+
+  if (!match) {
+    return;
+  }
+
+  window.requestAnimationFrame(
+    () => {
+
+      openArea(
+        match.area,
+        match.element
+      );
+
+    }
+  );
+
+}
+
 popupClose.addEventListener(
   "click",
   resetSearch
@@ -916,6 +1028,8 @@ async function loadMap() {
   );
 
   updateMissionIndicators();
+
+  openInitialMapTarget();
 
 }
 
