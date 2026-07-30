@@ -585,6 +585,60 @@ body.dark .card-mission-item{
 
 }
 
+.map-link-btn{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  margin-top:10px;
+
+  padding:9px 12px;
+
+  border-radius:12px;
+
+  background:var(--salone-blue);
+
+  color:#fff;
+
+  text-decoration:none;
+
+  font-size:13px;
+
+  font-weight:700;
+
+}
+
+.map-link-btn:hover{
+
+  opacity:.9;
+
+}
+
+.map-link-btn-small{
+
+  width:92px;
+
+  min-height:38px;
+
+  margin-top:0;
+
+  padding:8px;
+
+  text-align:center;
+
+  font-size:12px;
+
+}
+
+.mission-map-link{
+
+  margin-top:12px;
+
+}
+
 body.dark .card-mission-more{
 
   color:#aaa;
@@ -1339,7 +1393,7 @@ body.dark .mission-card p{
 
 }
 
-/* prioritÃ  */
+/* priorità */
 
 #priorityHighBtn.active {
 
