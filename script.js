@@ -489,6 +489,56 @@ function openMap(src){
 
 }
 
+function getMapUrlForPublisher(
+  publisher,
+  stand = ""
+){
+
+  const params =
+    new URLSearchParams();
+
+  if (publisher) {
+
+    params.set(
+      "publisher",
+      publisher
+    );
+
+  }
+
+  if (stand) {
+
+    params.set(
+      "stand",
+      stand
+    );
+
+  }
+
+  return `map.html?${
+    params.toString()
+  }`;
+
+}
+
+function getMapUrlForExhibitor(item){
+
+  return getMapUrlForPublisher(
+    item.name,
+    item.stand
+  );
+
+}
+
+function getMapUrlForMission(mission){
+
+  return getMapUrlForPublisher(
+    mission.publisher,
+    mission.stand
+  );
+
+}
+
 function closeMap(){
 
   mapModal.classList.remove("active");
@@ -1040,6 +1090,13 @@ function renderResults(items, value){
 
                   </div>
 
+                  <a
+                    class="map-link-btn"
+                    href="${getMapUrlForExhibitor(item)}"
+                  >
+                    Vedi sulla mappa
+                  </a>
+
                 </div>
               `
               : ""
@@ -1081,6 +1138,13 @@ function renderResults(items, value){
           </div>
 
           <div class="actions">
+
+            <a
+              class="map-link-btn map-link-btn-small"
+              href="${getMapUrlForExhibitor(item)}"
+            >
+              Vedi sulla mappa
+            </a>
 
             <button
               class="visited-btn ${
@@ -1564,6 +1628,13 @@ ${
   `
   : ""
 }
+
+<a
+  class="map-link-btn mission-map-link"
+  href="${getMapUrlForMission(item)}"
+>
+  Vedi sulla mappa
+</a>
 
             </div>
 
